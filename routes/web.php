@@ -3,7 +3,7 @@
 use App\Http\Controllers\DownloadController;
 use App\Http\Controllers\ImageUploadController;
 use App\Http\Controllers\ShowUploadController;
-use App\Http\Controllers\JsonFileController;
+
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,6 +22,8 @@ Route::get('/', ShowUploadController::class);
 Route::post('/image/upload', ImageUploadController::class);
 
 Route::post('/download', DownloadController::class);
+
+Route::get('test', 'App\Http\Controllers\TestController@index');
 
 
 
