@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ImageRequest;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use App\Models\Image;
@@ -12,14 +13,9 @@ use League\CommonMark\Normalizer\SlugNormalizer;
 
 class ImageUploadController extends Controller
 {
-    public function __invoke(Request $request)
+    public function __invoke(ImageRequest $request)
     {
-        $request->validate([
-            'images' => 'required|array|max:5',
-            'images.*' => 'image|mimes:jpeg,svg,png,jpg,gif|max:2048' // Пример правил валидации для изображений
-        ]);
 
-        //dd($request->images[0]->move(public_path('images'), 'hi'));
         $images = $request->file('images');
 
         if(count($images) > 5) {
@@ -37,16 +33,11 @@ class ImageUploadController extends Controller
                 $fullName = Str::uuid()->toString() . '.' . $extension; // Проверяем уникальность имени, если существует файл с таким именем, генерируем новое
             }
 
-            //dd($fullName);
-            //dd($request->images[$i]->move(public_path('images'), $fullName.'1'));
             $request->images[$i]->move(public_path('images'), $fullName);
-            //$images[$i]->move(public_path('images'), $fullName);
             $image = new Image;
             $image->filename = $fullName;
             $image->save();
 
-            //$image->storeAs('images', $fullName); // Сохраняем изображение с уникальным именем
-            // Далее можно продолжить дальнейшие операции с изображением
         }
 
         return redirect()->back()->with('success', 'Изображения успешно загружены.');

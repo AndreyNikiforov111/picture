@@ -18,13 +18,9 @@
 </head>
 <body class="antialiased container">
 <div class="">
-    <form action="/image/upload" method="POST" enctype="multipart/form-data">
+    <form action="{{route('image.upload')}}" method="POST" enctype="multipart/form-data">
         {{ csrf_field() }}
         <div class="form-group">
-            <input type="file" name="images[]" multiple class="p-2 m-3">
-            <input type="file" name="images[]" multiple class="p-2 m-3">
-            <input type="file" name="images[]" multiple class="p-2 m-3">
-            <input type="file" name="images[]" multiple class="p-2 m-3">
             <input type="file" name="images[]" multiple class="p-2 m-3">
         </div>
 

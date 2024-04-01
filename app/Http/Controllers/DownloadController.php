@@ -9,12 +9,7 @@ class DownloadController extends Controller
 {
     public function __invoke(Request $request)
     {
-        // Получаем список файлов, которые хотим добавить в архив
-        /*$files = [
-            'file1.jpg',
-            'file2.png',
-            // добавьте остальные файлы
-        ];*/
+
         $file = $request->input('download');
         // Создаем временный файл для хранения zip-архива
         $zipFileName = 'files.zip';
